@@ -21,6 +21,7 @@ namespace NetSwitch.Tests.Integration
 		{
 			Thread.Sleep(DelayAfterConnectingToHardware);
 
+			// TODO: Reimplement or remove
 			WaitForText("NetSwitch");
 
 			ReadFromDeviceAndOutputToConsole();

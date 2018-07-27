@@ -31,7 +31,7 @@ void serialPrintSwitchValue(int pinNumber, int switchState)
   Serial.print(pinNumber);
   Serial.print(":");
   Serial.print(switchState);
-  Serial.print(";");
+  Serial.println(";");
 }
 
 void processMsg(char* msg)

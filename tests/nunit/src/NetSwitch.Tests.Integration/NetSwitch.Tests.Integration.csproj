@@ -57,6 +57,8 @@
     <Compile Include="TimeoutHelper.cs" />
     <Compile Include="SwitchCommandTestFixture.cs" />
     <Compile Include="SwitchCommandTestHelper.cs" />
+    <Compile Include="SwitchToggleCommandTestFixture.cs" />
+    <Compile Include="SwitchToggleCommandTestHelper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
