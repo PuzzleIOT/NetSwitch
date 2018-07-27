@@ -31,7 +31,7 @@ void serialPrintSwitchValue(int pinNumber, int switchState)
   Serial.print(pinNumber);
   Serial.print(":");
   Serial.print(switchState);
-  Serial.println(";");
+  Serial.println(";;");
 }
 
 void processMsg(char* msg)
@@ -95,6 +95,8 @@ void processMsg(char* msg)
 
         pinMode(pinNumber, OUTPUT);
         digitalWrite(pinNumber, value);
+        
+        serialPrintSwitchValue(pinNumber, value);
       }
     }
     else if (letter == byte('A'))
