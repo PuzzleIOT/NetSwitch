@@ -24,6 +24,16 @@ void loop() {
   delay(1);
 }
 
+void serialPrintSwitchValue(int pinNumber, int switchState)
+{
+  Serial.print("D;");
+  Serial.print("D");
+  Serial.print(pinNumber);
+  Serial.print(":");
+  Serial.print(switchState);
+  Serial.print(";");
+}
+
 void processMsg(char* msg)
 {
 //  if (isDebugMode)
@@ -36,7 +46,27 @@ void processMsg(char* msg)
 
   if (letter != '\0')
   {
-    if (letter == byte('D'))
+    if (letter == byte('T'))
+    {
+      int pinNumber = getPinNumber(msg);
+
+      pinMode(pinNumber, OUTPUT);
+
+      int currentValue = digitalRead(pinNumber);
+
+      if (isDebugMode)
+      {
+        Serial.print("Toggling pin ");
+        Serial.println(pinNumber);
+        Serial.print("New value ");
+        Serial.println(!currentValue);
+      }
+      
+      digitalWrite(pinNumber, !currentValue);
+      
+      serialPrintSwitchValue(pinNumber, !currentValue);
+    }
+    else if (letter == byte('D'))
     {
       int pinNumber = getPinNumber(msg);
 
@@ -136,16 +166,18 @@ int getPinNumber(char* msg)
 
   int colonPosition = getColonPosition(msg);
 
-  int numberLength = colonPosition -1;
+  int numberLength = colonPosition > 0 ? colonPosition -1 : strlen(msg)-1;
 
   int outputPin = readInt(msg, 1, numberLength);
 
   if (isDebugMode)
   {
+    Serial.print("  Number length:");
+    Serial.println(numberLength);
     Serial.print("  Output pin:");
     Serial.println(outputPin);
 
-    Serial.println("Finished Getting pin number");
+    Serial.println("Finished getting pin number");
     Serial.println("");
   }
 
