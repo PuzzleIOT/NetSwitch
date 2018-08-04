@@ -20,8 +20,6 @@ void loop() {
 
     processMsg(msg);
   }
-
-  delay(1);
 }
 
 void serialPrintSwitchValue(int pinNumber, int switchState)
